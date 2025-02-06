@@ -1,4 +1,4 @@
-const searchButton = document.getElementById('search-button');
+﻿const searchButton = document.getElementById('search-button');
 const characterNameInput = document.getElementById('character-name');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
