@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fast Journal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.min.css">
+</head>
+<body>
+    <main>
+        <section id="search-area">
+            <h1>Fast journal</h1>
+            <input type="text" id="character-name" placeholder="캐릭터 ID 검색">
+            <button id="search-button">검색</button>
+        </section>
+
+        <section id="graph-area">
+            <canvas id="view-like-graph"></canvas>
+            <canvas id="view-chat-graph"></canvas>
+            <canvas id="view-comment-graph"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Fast Journal</p>
+    </footer>
+
+    <script src="src/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</body>
+</html>
