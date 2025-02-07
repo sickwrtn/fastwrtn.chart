@@ -3,14 +3,38 @@ const characterNameInput = document.getElementById('character-name');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
 const viewCommentGraph = document.getElementById('view-comment-graph');
-searchButton.addEventListener('click', () => {
-    const charId = characterNameInput.value;
+var getParameters = function (paramName) {
+    // 리턴값을 위한 변수 선언
+    var returnValue;
+    
+    // 현재 URL 가져오기
+    var url = location.href;
+    
+    // get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+    var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+    
+    // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+    for (var i = 0; i < parameters.length; i++) {
+        var varName = parameters[i].split('=')[0];
+        if (varName.toUpperCase() == paramName.toUpperCase()) {
+            returnValue = parameters[i].split('=')[1];
+            return decodeURIComponent(returnValue);
+        }
+    }
+};
+console.log(getParameters("charId"));
+if (getParameters("charId") != undefined){
+    characterNameInput.value = getParameters("charId");
     // 캐릭터 이름으로 조회수와 좋아요수 데이터를 가져오는 함수 호출
-    getCharacterData(charId)
+    getCharacterData(getParameters("charId"))
         .then(data => {
             // 그래프 그리기
             drawGraph(data);
         });
+}
+
+searchButton.addEventListener('click', () => {
+    location.href = `http://www.fastjournal.kro.kr/index.html?charId=${characterNameInput.value}`
 });
 
 async function getCharacterData(charId) {
