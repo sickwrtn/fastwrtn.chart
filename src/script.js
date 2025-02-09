@@ -3,6 +3,9 @@ const characterNameInput = document.getElementById('character-name');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
 const viewCommentGraph = document.getElementById('view-comment-graph');
+const userchatBYuser = document.getElementById('userChat/user');
+const likeBYuser = document.getElementById('like/user');
+const commentBYuser = document.getElementById('comment/user');
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
     var returnValue;
@@ -34,7 +37,7 @@ if (getParameters("charId") != undefined){
 }
 
 searchButton.addEventListener('click', () => {
-    location.href = `http://www.fastjournal.kro.kr/index.html?charId=${characterNameInput.value}`
+    location.href = `http://127.0.0.1:5500/index.html?charId=${characterNameInput.value}`
 });
 
 async function getCharacterData(charId) {
@@ -45,7 +48,7 @@ async function getCharacterData(charId) {
             fetch(`http://api.fastwrtn.kro.kr/character?charId=${charId}`).then(res => res.json()).then(charInfo => {
                 if (charInfo.FAIL != null){
                     if (charInfo.FAIL == "Character Id founded but to tracing log so added tracer"){
-                        alert("통계추적에 등록 되지 않았던 캐릭터 ID 입니다. 지금부터 통계추적에 포함시키겠습니다.");
+                        alert("통계추적에 등록 되지 않았던 캐릭터 ID 입니다. 지금부터 통계추적에 포함시키겠습니다. (10분마다 업데이트 됩니다)");
                     }
                     if (charInfo.FAIL == "Character Id not founded"){
                         alert("잘못된 캐릭터 ID 입니다.");
@@ -77,6 +80,9 @@ function drawGraph(data) {
     if (chartStatus3 !== undefined) {
         chartStatus3.destroy();
     }
+    userchatBYuser.textContent += data.chatCount[data.chatCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1]
+    likeBYuser.textContent += data.likeCount[data.likeCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
+    commentBYuser.textContent += data.commentCount[data.commentCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
     const ctx = viewLikeGraph.getContext('2d');
     const cdx = viewChatGraph.getContext('2d');
     const ccx = viewCommentGraph.getContext('2d');

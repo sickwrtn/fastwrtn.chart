@@ -1,3 +1,8 @@
 h1,footer {
     color: rgb(253, 111, 34);
 }
+
+fieldset#analyze {
+    border: 3.5px solid black;
+    padding: 10px;
+}
