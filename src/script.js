@@ -39,7 +39,7 @@ if (getParameters("charId") != undefined){
 }
 
 searchButton.addEventListener('click', () => {
-    location.href = `http://127.0.0.1:5500/index.html?charId=${characterNameInput.value}`
+    location.href = `http://www.fastjournal.kro.kr/index.html?charId=${characterNameInput.value}`
 });
 
 async function getCharacterData(charId) {
