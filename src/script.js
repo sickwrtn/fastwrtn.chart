@@ -9,6 +9,33 @@ const likeBYuser = document.getElementById('like/user');
 const commentBYuser = document.getElementById('comment/user');
 const fresh = document.getElementById('fresh');
 const characterName = document.getElementById('name');
+const timeL = document.getElementById('time');
+var initTime = timeL.textContent;
+
+setInterval(()=>{
+    var today = new Date();
+    if (today.getMinutes() <= 10){
+        today.setMinutes(10 - today.getMinutes());
+    }
+    else if (today.getMinutes() <= 20){
+        today.setMinutes(20 - today.getMinutes());
+    }
+    else if (today.getMinutes() <= 30){
+        today.setMinutes(30 - today.getMinutes());
+    }
+    else if (today.getMinutes() <= 40){
+        today.setMinutes(40 - today.getMinutes());
+    }
+    else if (today.getMinutes() <= 50){
+        today.setMinutes(50 - today.getMinutes());
+    }
+    else if (today.getMinutes() <= 60){
+        today.setMinutes(60 - today.getMinutes());
+    }
+    today.setSeconds(60 - today.getSeconds());
+    timeL.textContent = initTime + `${today.getMinutes()}:${today.getSeconds()}`;
+})
+
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
     var returnValue;
