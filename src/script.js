@@ -8,6 +8,7 @@ const userchatBYuser = document.getElementById('userChat/user');
 const likeBYuser = document.getElementById('like/user');
 const commentBYuser = document.getElementById('comment/user');
 const fresh = document.getElementById('fresh');
+const characterName = document.getElementById('name');
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
     var returnValue;
@@ -58,6 +59,7 @@ async function getCharacterData(charId) {
                     return true;
                 }
                 resolve({
+                    charId: charInfo['data']['name'],
                     labels: charInfo['data']['labels'],
                     chatCount: charInfo['data']['chatCount'],
                     chatUserCount: charInfo['data']['chatUserCount'],
@@ -85,6 +87,7 @@ function drawGraph(data) {
     var cbu = data.chatCount[data.chatCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
     var lbu = data.likeCount[data.likeCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
     var mbu = data.commentCount[data.commentCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1]; 
+    characterName.textContent += data.charId;
     userchatBYuser.textContent += cbu;
     likeBYuser.textContent += lbu;
     commentBYuser.textContent += mbu
