@@ -33,7 +33,9 @@ setInterval(()=>{
         today.setMinutes(59 - today.getMinutes());
     }
     today.setSeconds(60 - today.getSeconds());
-    timeL.textContent = initTime + `${today.getMinutes()}:${today.getSeconds()}`;
+    var minute = today.getMinutes() >= 10 ? today.getMinutes() : '0' + today.getMinutes();
+    var second = today.getSeconds() >= 10 ? today.getSeconds() : '0' + today.getSeconds();
+    timeL.textContent = initTime + `${minute}:${second}`;
 })
 
 var getParameters = function (paramName) {
