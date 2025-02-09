@@ -88,7 +88,7 @@ function drawGraph(data) {
     userchatBYuser.textContent += cbu;
     likeBYuser.textContent += lbu;
     commentBYuser.textContent += mbu
-    if (cbu > 1.5){
+    if (cbu > 1.6){
         fresh.textContent += "완벽하게 신선함";
     }
     else if (cbu > 1.4){
@@ -102,6 +102,9 @@ function drawGraph(data) {
     }
     else if (cbu > 1.1){
         fresh.textContent += "보통 신선함";
+    }
+    else if (cbu > 1.0){
+        fresh.textContent += "낮은 신선함";
     }
     else {
         fresh.textContent += "신선하지 않음";
