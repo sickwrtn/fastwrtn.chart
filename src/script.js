@@ -3,9 +3,11 @@ const characterNameInput = document.getElementById('character-name');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
 const viewCommentGraph = document.getElementById('view-comment-graph');
+const viewFive = document.getElementById('view-5');
 const userchatBYuser = document.getElementById('userChat/user');
 const likeBYuser = document.getElementById('like/user');
 const commentBYuser = document.getElementById('comment/user');
+const fresh = document.getElementById('fresh');
 var getParameters = function (paramName) {
     // 리턴값을 위한 변수 선언
     var returnValue;
@@ -80,12 +82,34 @@ function drawGraph(data) {
     if (chartStatus3 !== undefined) {
         chartStatus3.destroy();
     }
-    userchatBYuser.textContent += data.chatCount[data.chatCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1]
-    likeBYuser.textContent += data.likeCount[data.likeCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
-    commentBYuser.textContent += data.commentCount[data.commentCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
+    var cbu = data.chatCount[data.chatCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
+    var lbu = data.likeCount[data.likeCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1];
+    var mbu = data.commentCount[data.commentCount.length - 1] / data.chatUserCount[data.chatUserCount.length - 1]; 
+    userchatBYuser.textContent += cbu;
+    likeBYuser.textContent += lbu;
+    commentBYuser.textContent += mbu
+    if (cbu > 1.5){
+        fresh.textContent += "완벽하게 신선함";
+    }
+    else if (cbu > 1.4){
+        fresh.textContent += "매우 신선함";
+    }
+    else if (cbu > 1.3){
+        fresh.textContent += "신선함";
+    }
+    else if (cbu > 1.2){
+        fresh.textContent += "어느정도 신선함";
+    }
+    else if (cbu > 1.1){
+        fresh.textContent += "보통 신선함";
+    }
+    else {
+        fresh.textContent += "신선하지 않음";
+    }
     const ctx = viewLikeGraph.getContext('2d');
     const cdx = viewChatGraph.getContext('2d');
     const ccx = viewCommentGraph.getContext('2d');
+    const clx = viewFive.getContext('2d');
     new Chart(ctx, {
         type: 'line',
         data: {
