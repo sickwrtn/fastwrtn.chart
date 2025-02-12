@@ -1,5 +1,6 @@
 ﻿const searchButton = document.getElementById('search-button');
 const characterNameInput = document.getElementById('character-name');
+const viewChatUserGraph = document.getElementById('view-chatuser-graph');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
 const viewCommentGraph = document.getElementById('view-comment-graph');
@@ -144,6 +145,7 @@ function drawGraph(data) {
     else {
         fresh.textContent += "신선하지 않음";
     }
+    const cix = viewChatUserGraph.getContext('2d');
     const ctx = viewLikeGraph.getContext('2d');
     const cdx = viewChatGraph.getContext('2d');
     const ccx = viewCommentGraph.getContext('2d');
@@ -240,6 +242,37 @@ function drawGraph(data) {
         }
     }
     });
+    new Chart(cix, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '채팅한유저수',
+                data: data.chatUserCount,
+                borderColor: 'red',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '날짜'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '횟수'
+                    }
+                }
+            }
+        }
+    });
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -248,11 +281,6 @@ function drawGraph(data) {
                 label: '채팅방수',
                 data: data.chatCount,
                 borderColor: 'blue',
-                fill: false
-            }, {
-                label: '채팅한유저수',
-                data: data.chatUserCount,
-                borderColor: 'red',
                 fill: false
             }]
         },
