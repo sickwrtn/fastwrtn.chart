@@ -3,7 +3,7 @@
 <head>
     <title>Fast Journal</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/main.css?dt=12">
+    <link rel="stylesheet" href="css/main.css?dt=202502130523">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.min.css">
 </head>
 <body>
@@ -17,6 +17,7 @@
             <fieldset id="analyze">
                 <legend>유저 이벤트 통계</legend>
                 <label id="name">이름 : </label>
+                <label id="score">신선지수 : </label>
                 <label id="fresh">신선도 : </label> 
                 <label id="userChat/user">채팅방/유저 : </label>
                 <label id="like/user">좋아요/유저 : </label>
@@ -24,14 +25,33 @@
             </fieldset>
         </section>
         <section id="graph-area">
-            <canvas id="like-correlation"></canvas>
-            <h2 id="like-equation"><h2></h2>
-            <canvas id="chat-correlation"></canvas>
-            <h2 id="chat-equation"><h2></h2>
-            <canvas id="view-chatuser-graph"></canvas>
-            <canvas id="view-like-graph"></canvas>
-            <canvas id="view-chat-graph"></canvas>
-            <canvas id="view-comment-graph"></canvas>
+            <fieldset class="graph">
+                <legend>상관관계 그래프</legend>
+                <canvas id="like-correlation"></canvas>
+                <h2 id="like-equation"></h2>
+                <canvas id="chat-correlation"></canvas>
+                <h2 id="chat-equation"></h2>
+            </fieldset>
+            <fieldset class="graph">
+                <legend>채팅한 유저수 그래프</legend>
+                <canvas id="view-chatuser-graph"></canvas>
+                <canvas id="DCD-chatUserCount"></canvas>
+            </fieldset>
+            <fieldset class="graph">
+                <legend>채팅방수 그래프</legend>
+                <canvas id="view-like-graph"></canvas>
+                <canvas id="DCD-chatCount"></canvas>
+            </fieldset>
+            <fieldset class="graph">
+                <legend>좋아요수 그래프</legend>
+                <canvas id="view-chat-graph"></canvas>
+                <canvas id="DCD-likeCount"></canvas>
+            </fieldset>
+            <fieldset class="graph">
+                <legend>댓글 그래프</legend>
+                <canvas id="view-comment-graph"></canvas>
+                <canvas id="DCD-commentCount"></canvas>
+            </fieldset>
         </section>
     </main>
     <footer>
@@ -39,7 +59,7 @@
         <p>&copy; 2025 Fast Journal</p>
     </footer>
 
-    <script src="src/script.js?dt=202502130307"></script>
+    <script src="src/script.js?dt=202502130523"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/2.0.1/regression.min.js"></script>
 </body>

@@ -2,11 +2,6 @@ h1,footer {
     color: rgb(253, 111, 34);
 }
 
-fieldset#analyze {
-    border: 3.5px solid black;
-    padding: 10px;
-}
-
 h2#like-equation {
     font-family: math;
     text-align: center;
@@ -14,4 +9,13 @@ h2#like-equation {
 h2#chat-equation {
     font-family: math;
     text-align: center;
+}
+
+fieldset#analyze {
+    border: 3.5px solid black;
+    padding: 10px;
+}
+
+.graph {
+    border: 3.5px solid black;
 }
