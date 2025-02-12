@@ -3,7 +3,10 @@ const characterNameInput = document.getElementById('character-name');
 const viewLikeGraph = document.getElementById('view-like-graph');
 const viewChatGraph = document.getElementById('view-chat-graph');
 const viewCommentGraph = document.getElementById('view-comment-graph');
-const viewFive = document.getElementById('view-5');
+const like_correlation = document.getElementById('like-correlation');
+const chat_correlation = document.getElementById('chat-correlation');
+const like_equation = document.getElementById('like-equation');
+const chat_equation = document.getElementById('chat-equation');
 const userchatBYuser = document.getElementById('userChat/user');
 const likeBYuser = document.getElementById('like/user');
 const commentBYuser = document.getElementById('comment/user');
@@ -144,7 +147,99 @@ function drawGraph(data) {
     const ctx = viewLikeGraph.getContext('2d');
     const cdx = viewChatGraph.getContext('2d');
     const ccx = viewCommentGraph.getContext('2d');
-    const clx = viewFive.getContext('2d');
+    const clx = like_correlation.getContext('2d');
+    const ckx = chat_correlation.getContext('2d');
+    var cc = [];
+    var cc2 = [];
+    var test = [];
+    var test2 = [];
+    for (let index = 0; index < data.chatUserCount.length; index++) {
+        cc[cc.length] = {x: data.chatUserCount[index], y:data.likeCount[index]};
+    }
+    for (let index = 0; index < data.chatUserCount.length; index++) {
+        cc2[cc2.length] = {x: data.chatUserCount[index], y:data.chatCount[index]};
+    }
+    for (let index = 0; index < data.chatUserCount.length; index++) {
+        test[test.length] = [data.chatUserCount[index],data.chatCount[index]];
+    }
+    for (let index = 0; index < data.chatUserCount.length; index++) {
+        test2[test2.length] = [data.chatUserCount[index],data.likeCount[index]];
+    }
+    const result = regression.linear(test);
+    chat_equation.textContent = result.string;
+    const result2 = regression.linear(test2);
+    like_equation.textContent = result2.string;
+    new Chart(clx, {
+        type: 'scatter', // 산점도 그래프
+        data: {
+          datasets: [{
+                label: '유저 수와 좋아요 수 상관관계',
+                data: [result2.points[0],result2.points[result2.points.length-1]],
+                type: 'line',
+                borderColor: 'rgb(15, 0, 3)', // 선 색상
+            },{
+            label: '유저 수와 좋아요 수 상관관계',
+            data: cc,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)', // 점 색상
+            borderColor: 'rgba(54, 162, 235, 1)', // 점 테두리 색상
+            borderWidth: 1,
+            pointRadius: 5 // 점 크기
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: '유저 수'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '좋아요 수'
+              }
+            }
+          }
+        }
+      });
+    new Chart(ckx, {
+    type: 'scatter', // 산점도 그래프
+    data: {
+        datasets: [{
+            label: '유저 수와 좋아요 수 상관관계',
+            data: [result.points[0],result.points[result.points.length-1]],
+            type: 'line',
+            borderColor: 'rgb(0, 0, 0)', // 선 색상
+        },{
+            label: '유저 수와 채팅방 수 상관관계',
+            data: cc2,
+            backgroundColor: 'rgba(235, 54, 54, 0.2)', // 점 색상
+            borderColor: 'rgb(235, 54, 54)', // 점 테두리 색상
+            borderWidth: 1,
+            pointRadius: 5, // 점 크기
+        }]
+    },
+    options: {
+        scales: {
+        x: {
+            title: {
+            display: true,
+            text: '유저 수'
+            }
+        },
+        y: {
+            title: {
+            display: true,
+            text: '채팅방 수'
+            }
+        }
+        },
+        legend: {
+            reverse: true
+        }
+    }
+    });
     new Chart(ctx, {
         type: 'line',
         data: {
