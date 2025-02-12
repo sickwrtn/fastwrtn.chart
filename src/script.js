@@ -8,7 +8,6 @@ const like_correlation = document.getElementById('like-correlation');
 const chat_correlation = document.getElementById('chat-correlation');
 const like_equation = document.getElementById('like-equation');
 const chat_equation = document.getElementById('chat-equation');
-const freshScore = document.getElementById('score');
 const userchatBYuser = document.getElementById('userChat/user');
 const DCD_chatUserCount = document.getElementById('DCD-chatUserCount');
 const DCD_chatCount = document.getElementById('DCD-chatCount');
