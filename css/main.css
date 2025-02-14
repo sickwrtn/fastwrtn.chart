@@ -19,3 +19,11 @@ fieldset#analyze {
 .graph {
     border: 3.5px solid black;
 }
+
+fieldset#upload-field {
+    border: 3.5px solid black;
+}
+
+.sumbit {
+    float: right;
+}
