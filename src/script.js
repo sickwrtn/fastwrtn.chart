@@ -103,7 +103,7 @@ if (getParameters("charId") != undefined){
 }
 
 searchButton.addEventListener('click', () => {
-    location.href = `http://www.fastjournal.kro.kr/index.html?charId=${characterNameInput.value}`
+    location.href = `https://www.fastwrtn.com/index.html?charId=${characterNameInput.value}`
 });
 
 async function getCharacterData(charId) {
@@ -111,7 +111,7 @@ async function getCharacterData(charId) {
     // 예시 데이터
     return new Promise(resolve => {
         setTimeout(() => {
-            fetch(`http://api.fastwrtn.kro.kr/character?charId=${charId}`).then(res => res.json()).then(charInfo => {
+            fetch(`https://api.fastwrtn.com/character?charId=${charId}`).then(res => res.json()).then(charInfo => {
                 if (charInfo.FAIL != null){
                     if (charInfo.FAIL == "Character Id founded but to tracing log so added tracer"){
                         alert("통계추적에 등록 되지 않았던 캐릭터 ID 입니다. 지금부터 통계추적에 포함시키겠습니다. (10분마다 업데이트 됩니다)");
